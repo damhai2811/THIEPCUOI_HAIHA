@@ -74,26 +74,26 @@ button{font-family:var(--sans);cursor:pointer;}
 }
 .hero-save{
   font-family:var(--serif);font-weight:500;
-  font-size:22px;letter-spacing:.35em;text-transform:uppercase;
+  font-size:28px;letter-spacing:.35em;text-transform:uppercase;
   color:#fff;line-height:1;
 }
 .hero-the{
   font-family:var(--script);
-  font-size:38px;color:#fff;
+  font-size:45px;color:#fff;
   line-height:.85;margin:0;
 }
 .hero-date-txt{
   font-family:var(--serif);font-weight:500;
-  font-size:22px;letter-spacing:.35em;text-transform:uppercase;
+  font-size:28px;letter-spacing:.35em;text-transform:uppercase;
   color:#fff;line-height:1;margin-bottom:20px;
 }
 .hero-name{
   font-family:var(--script);
-  font-size:48px;color:#fff;line-height:1.2;
+  font-size:50px;color:#fff;line-height:1.2;
   text-shadow:0 2px 14px rgba(0,0,0,.3);
 }
 .hero-hearts{
-  font-size:22px;color:#fff;
+  font-size:32px;color:#fff;
   letter-spacing:4px;margin:4px 0;
   opacity:.9;
 }
@@ -322,6 +322,13 @@ button{font-family:var(--sans);cursor:pointer;}
   pointer-events:none;
   filter:drop-shadow(2px 6px 10px rgba(0,0,0,.18));
 }
+.p-bouquet1{
+  position:absolute;
+  top:22%; left:-10px;
+  width:130px; z-index:10;
+  filter:drop-shadow(2px 6px 12px rgba(0,0,0,.3));
+  pointer-events:none;
+}
 
 /* BASE polaroid */
 .p-card{
@@ -361,9 +368,9 @@ button{font-family:var(--sans);cursor:pointer;}
 /* Wax seal */
 .p-wax{
   position:absolute;
-  width:78px;
+  width:100px;
   right:28%;
-  top:48%;
+  top:45%;
   z-index:12;
   filter:drop-shadow(0 2px 8px rgba(0,0,0,.5));
 }
@@ -379,14 +386,14 @@ button{font-family:var(--sans);cursor:pointer;}
   z-index:10;
 }
 .p-hearts .ph-big{
-  width:128px;
-  transform:rotate(-10deg);
+  width:140px;
+  transform:rotate(15deg);
   transform-origin:center;
 }
 .p-hearts .ph-sm{
-  width:96px;
+  width:110px;
   margin-right:20px;
-  transform:rotate(-8deg);
+  transform:rotate(-15deg);
   transform-origin:center;
 }
 
@@ -476,17 +483,14 @@ button{font-family:var(--sans);cursor:pointer;}
   overflow:hidden;
 }
 
-
-
 .ty-script{
   font-family:var(--script);
   padding-top:300px;
-  font-size:54px;
+  font-size:64px;
   color:var(--olive-dk);
   margin-bottom:12px;
   position:relative;
   z-index:1;
-  transform: rotate(180deg);
 }
 
 .ty-desc{
@@ -497,7 +501,6 @@ button{font-family:var(--sans);cursor:pointer;}
   margin:0 auto;
   position:relative;
   z-index:1;
-  transform: rotate(180deg);
 }
 
 /* ═══════════════════════════════
@@ -535,51 +538,7 @@ button{font-family:var(--sans);cursor:pointer;}
 }
 .lb-prev{left:10px;} .lb-next{right:10px;}
 
-/* ═══════════════════════════════
-   RSVP MODAL (bottom sheet)
-═══════════════════════════════ */
-.modal-ov{
-  position:fixed;inset:0;z-index:8000;
-  background:rgba(15,18,10,.7);
-  display:flex;align-items:flex-end;justify-content:center;
-  opacity:0;pointer-events:none;
-  transition:opacity .28s;
-}
-.modal-ov.open{opacity:1;pointer-events:all;}
-.modal-sheet{
-  background:#fff;border-radius:20px 20px 0 0;
-  padding:24px 22px 40px;
-  width:100%;max-width:480px;max-height:88vh;overflow-y:auto;
-  transform:translateY(50px);
-  transition:transform .32s cubic-bezier(.22,1,.36,1);
-}
-.modal-ov.open .modal-sheet{transform:translateY(0);}
-.modal-handle{width:36px;height:4px;border-radius:2px;background:#ddd;margin:0 auto 18px;}
-.modal-title{
-  font-family:var(--serif);font-size:22px;font-weight:600;
-  color:var(--olive);text-align:center;margin-bottom:18px;
-}
-.modal-label{
-  display:block;font-size:11px;font-weight:600;
-  letter-spacing:.08em;text-transform:uppercase;
-  color:var(--textsub);margin-bottom:5px;
-}
-.modal-field{
-  width:100%;height:42px;
-  border:1.5px solid #ddd;border-radius:8px;
-  padding:0 12px;font-size:13px;
-  font-family:var(--sans);background:#fafaf8;
-  outline:none;margin-bottom:12px;
-}
-.modal-field:focus{border-color:var(--olive);}
-.modal-submit{
-  width:100%;height:44px;border-radius:999px;
-  background:var(--olive);color:#fff;border:none;
-  font-size:12px;font-weight:600;letter-spacing:.15em;
-  text-transform:uppercase;margin-top:4px;
-}
-.modal-close-row{display:flex;justify-content:flex-end;}
-.modal-x{background:none;border:none;font-size:20px;color:#aaa;cursor:pointer;}
+
 
 /* ═══════════════════════════════
    8. COUNTDOWN

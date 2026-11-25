@@ -155,23 +155,42 @@ rsvpModal.querySelector('.modal-submit')?.addEventListener('click', () => {
   alert(`Cảm ơn ${name}! Đã ghi nhận xác nhận tham dự. 🎉`);
 });
 
-/* ── Countdown đến 27/12/2026 ── */
+
+
+
+/* ===== COUNTDOWN 27/12/2026 ===== */
+
+const targetDate = new Date('2026-12-27T00:00:00+09:00').getTime();
+
 function updateCountdown() {
-  const now = new Date();
-  const target = new Date('2026-12-27T00:00:00');
-  let diff = target - now;
-  
-  if (diff < 0) diff = 0;
-  
-  const days = Math.floor(diff / (1000*60*60*24));
-  const hours = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
-  const minutes = Math.floor((diff % (1000*60*60)) / (1000*60));
-  const seconds = Math.floor((diff % (1000*60)) / 1000);
-  
-  document.getElementById('cd-days').textContent = String(days).padStart(2, '0');
-  document.getElementById('cd-hours').textContent = String(hours).padStart(2, '0');
-  document.getElementById('cd-minutes').textContent = String(minutes).padStart(2, '0');
-  document.getElementById('cd-seconds').textContent = String(seconds).padStart(2, '0');
+  const now = Date.now();
+  const diff = targetDate - now;
+
+  const daysEl = document.getElementById('cd-days');
+  const hoursEl = document.getElementById('cd-hours');
+  const minutesEl = document.getElementById('cd-minutes');
+  const secondsEl = document.getElementById('cd-seconds');
+
+  if (!daysEl || !hoursEl || !minutesEl || !secondsEl) {
+    console.error('Countdown: Không tìm thấy ID HTML!');
+    return;
+  }
+
+  const remaining = Math.max(0, diff);
+
+  const days = Math.floor(remaining / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((remaining / (1000 * 60 * 60)) % 24);
+  const minutes = Math.floor((remaining / (1000 * 60)) % 60);
+  const seconds = Math.floor((remaining / 1000) % 60);
+
+  daysEl.textContent = String(days).padStart(2, '0');
+  hoursEl.textContent = String(hours).padStart(2, '0');
+  minutesEl.textContent = String(minutes).padStart(2, '0');
+  secondsEl.textContent = String(seconds).padStart(2, '0');
 }
+
+// Chạy ngay khi JS được thực thi
 updateCountdown();
+
+// Tự động cập nhật mỗi giây
 setInterval(updateCountdown, 1000);

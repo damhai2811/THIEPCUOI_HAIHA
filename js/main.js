@@ -3,6 +3,43 @@
 ══════════════════════════════════════════════════ */
 const GOOGLE_SCRIPT_URL = '';
 
+/* ===== COUNTDOWN 27/12/2026 ===== */
+
+const targetDate = new Date('2026-12-27T00:00:00+09:00').getTime();
+
+function updateCountdown() {
+  const now = Date.now();
+  const diff = targetDate - now;
+
+  const daysEl = document.getElementById('cd-days');
+  const hoursEl = document.getElementById('cd-hours');
+  const minutesEl = document.getElementById('cd-minutes');
+  const secondsEl = document.getElementById('cd-seconds');
+
+  if (!daysEl || !hoursEl || !minutesEl || !secondsEl) {
+    console.error('Countdown: Không tìm thấy ID HTML!');
+    return;
+  }
+
+  const remaining = Math.max(0, diff);
+
+  const days = Math.floor(remaining / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((remaining / (1000 * 60 * 60)) % 24);
+  const minutes = Math.floor((remaining / (1000 * 60)) % 60);
+  const seconds = Math.floor((remaining / 1000) % 60);
+
+  daysEl.textContent = String(days).padStart(2, '0');
+  hoursEl.textContent = String(hours).padStart(2, '0');
+  minutesEl.textContent = String(minutes).padStart(2, '0');
+  secondsEl.textContent = String(seconds).padStart(2, '0');
+}
+
+// Chạy ngay khi JS được thực thi
+updateCountdown();
+
+// Tự động cập nhật mỗi giây
+setInterval(updateCountdown, 1000);
+
 /* ── Scroll reveal ── */
 const revealEls = document.querySelectorAll('.reveal');
 const ro = new IntersectionObserver(entries => {
@@ -108,6 +145,7 @@ const list  = document.getElementById('gb-list');
 const empty = document.getElementById('gb-empty');
 
 function renderMsgs() {
+  if (!list || !empty) return;
   list.querySelectorAll('.gb-item').forEach(el => el.remove());
   if (!msgs.length) { empty.style.display = 'block'; return; }
   empty.style.display = 'none';
@@ -135,15 +173,15 @@ document.getElementById('gb-submit')?.addEventListener('click', () => {
 /* ── RSVP Modal ── */
 const rsvpModal = document.getElementById('rsvp-modal');
 document.getElementById('btn-rsvp')?.addEventListener('click', () => {
-  rsvpModal.classList.add('open'); document.body.style.overflow = 'hidden';
+  rsvpModal?.classList.add('open'); document.body.style.overflow = 'hidden';
 });
-rsvpModal.querySelector('.modal-x')?.addEventListener('click', () => {
+rsvpModal?.querySelector('.modal-x')?.addEventListener('click', () => {
   rsvpModal.classList.remove('open'); document.body.style.overflow = '';
 });
-rsvpModal.addEventListener('click', e => {
+rsvpModal?.addEventListener('click', e => {
   if (e.target === rsvpModal) { rsvpModal.classList.remove('open'); document.body.style.overflow = ''; }
 });
-rsvpModal.querySelector('.modal-submit')?.addEventListener('click', () => {
+rsvpModal?.querySelector('.modal-submit')?.addEventListener('click', () => {
   const name   = document.getElementById('rsvp-name')?.value.trim();
   if (!name) { alert('Vui lòng nhập tên!'); return; }
   const party  = document.getElementById('rsvp-party')?.value;
@@ -151,46 +189,6 @@ rsvpModal.querySelector('.modal-submit')?.addEventListener('click', () => {
   let rsvps = JSON.parse(localStorage.getItem('wb_rsvps') || '[]');
   rsvps.push({ name, party, guests, time: Date.now() });
   localStorage.setItem('wb_rsvps', JSON.stringify(rsvps));
-  rsvpModal.classList.remove('open'); document.body.style.overflow = '';
+  rsvpModal?.classList.remove('open'); document.body.style.overflow = '';
   alert(`Cảm ơn ${name}! Đã ghi nhận xác nhận tham dự. 🎉`);
 });
-
-
-
-
-/* ===== COUNTDOWN 27/12/2026 ===== */
-
-const targetDate = new Date('2026-12-27T00:00:00+09:00').getTime();
-
-function updateCountdown() {
-  const now = Date.now();
-  const diff = targetDate - now;
-
-  const daysEl = document.getElementById('cd-days');
-  const hoursEl = document.getElementById('cd-hours');
-  const minutesEl = document.getElementById('cd-minutes');
-  const secondsEl = document.getElementById('cd-seconds');
-
-  if (!daysEl || !hoursEl || !minutesEl || !secondsEl) {
-    console.error('Countdown: Không tìm thấy ID HTML!');
-    return;
-  }
-
-  const remaining = Math.max(0, diff);
-
-  const days = Math.floor(remaining / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((remaining / (1000 * 60 * 60)) % 24);
-  const minutes = Math.floor((remaining / (1000 * 60)) % 60);
-  const seconds = Math.floor((remaining / 1000) % 60);
-
-  daysEl.textContent = String(days).padStart(2, '0');
-  hoursEl.textContent = String(hours).padStart(2, '0');
-  minutesEl.textContent = String(minutes).padStart(2, '0');
-  secondsEl.textContent = String(seconds).padStart(2, '0');
-}
-
-// Chạy ngay khi JS được thực thi
-updateCountdown();
-
-// Tự động cập nhật mỗi giây
-setInterval(updateCountdown, 1000);

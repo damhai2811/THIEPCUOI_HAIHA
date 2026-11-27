@@ -433,8 +433,9 @@ button{font-family:var(--sans);cursor:pointer;}
   content:'';
   position:absolute;
   top:0;left:0;right:0;
-  /* đủ cao để bao phần torn nhô lên + một dải olive trên torn */
-  height:36%;
+  /* kết thúc đúng giữa pearl-string: torn (637/1050 bề rộng) + nửa pearl (26.5/1050)
+     → giao điểm olive/kem bị pearl che, không phụ thuộc chiều cao album */
+  height:calc(min(100vw, 480px) * 663.5 / 1050);
   background:#4b5411;
   z-index:0;
 }
@@ -443,6 +444,11 @@ button{font-family:var(--sans);cursor:pointer;}
   position:relative;
   z-index:2;
   margin-top:0;
+  /* ép đúng 100% bề rộng: tránh lệch sub-pixel (vd 389.72px) trên mobile */
+  width:100%;
+  max-width:none;
+  height:auto;
+  aspect-ratio:1050/53;
 }
 .album-title{
   font-family:var(--script);
